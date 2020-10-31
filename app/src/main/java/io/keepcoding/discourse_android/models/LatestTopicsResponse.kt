@@ -2,11 +2,12 @@ package io.keepcoding.discourse_android.models
 
 import java.io.Serializable
 
+//TODO: Crear modelo de datos personalizado
+
 
 data class LatestTopicsResponse(
 	val primaryGroups: List<Any?>? = null,
 	val topicList: TopicList? = null,
-	val users: List<UsersItem?>? = null
 ) : Serializable
 
 data class TopicList(

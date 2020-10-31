@@ -8,6 +8,5 @@ import retrofit2.http.Headers
 interface DiscourseApi {
     @GET ("latest")
     @Headers("Content-Type: application/json")
-    //TODO: reemplazar object con el modelo de respuesta
-    fun getResponse() : Call <LatestTopicsResponse>
+    fun getLatestTopics() : Call <LatestTopicsResponse>
 }
