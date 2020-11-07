@@ -1,4 +1,4 @@
-package io.keepcoding.discourse_android.network
+package io.keepcoding.discourse_android.Data.Client.Http
 
 import okhttp3.OkHttpClient
 import retrofit2.Response
