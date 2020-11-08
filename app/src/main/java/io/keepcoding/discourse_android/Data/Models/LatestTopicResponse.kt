@@ -209,7 +209,7 @@ data class TopicItem(
 			return topics
 		}
 
-		private fun parseUser (user: UsersItem?): Poster {
+		fun parseUser (user: UsersItem?): Poster {
 
 			val avatarTemplate = user?.avatarTemplate
 			val sized = avatarTemplate?.replace(oldValue = "{size}", newValue = "80")
@@ -221,7 +221,7 @@ data class TopicItem(
 			)
 		}
 
-		private fun parseTopic(topic: TopicsItem?, poster: Poster?): TopicItem {
+		fun parseTopic(topic: TopicsItem?, poster: Poster?): TopicItem {
 			val date = topic?.createdAt
 					?.replace("Z", "+0000") ?: ""
 
