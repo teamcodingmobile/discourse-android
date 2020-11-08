@@ -6,8 +6,8 @@
     <string name="minutes_zero">Just now</string>
     <string name="topics">Topics</string>
     <plurals name="years">
-        <item quantity="one">%d year</item>
-        <item quantity="other">%d years</item>
+        <item quantity="one">%d year ago</item>
+        <item quantity="other">%d years ago</item>
     </plurals>
 
     <plurals name="months">
