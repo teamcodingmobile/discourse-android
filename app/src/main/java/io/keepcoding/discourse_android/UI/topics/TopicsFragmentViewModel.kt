@@ -2,10 +2,9 @@ package io.keepcoding.discourse_android.UI.topics
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
-import com.google.gson.JsonObject
 import io.keepcoding.discourse_android.Data.Client.Http.DiscourseService
-import io.keepcoding.discourse_android.Data.Models.LatestTopicResponse
-import io.keepcoding.discourse_android.Data.Models.TopicItem
+import io.keepcoding.discourse_android.Data.Models.AppModels.TopicItem
+import io.keepcoding.discourse_android.Data.Models.ResponseModels.LatestTopicResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

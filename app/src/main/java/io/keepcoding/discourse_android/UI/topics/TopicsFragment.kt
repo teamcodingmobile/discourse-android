@@ -6,21 +6,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.google.gson.JsonObject
 import io.keepcoding.discourse_android.CustomViewModelFactory
 import io.keepcoding.discourse_android.Data.Client.Http.DiscourseService
-import io.keepcoding.discourse_android.Data.Models.LatestTopicResponse
-import io.keepcoding.discourse_android.Data.Models.TopicItem
+import io.keepcoding.discourse_android.Data.Models.AppModels.TopicItem
+import io.keepcoding.discourse_android.Data.Models.ResponseModels.LatestTopicResponse
 import io.keepcoding.discourse_android.R
-import kotlinx.android.synthetic.main.item_topic.view.*
 import kotlinx.android.synthetic.main.topics_fragment.*
 import kotlinx.android.synthetic.main.view_topics_error.*
-import org.json.JSONObject
 import retrofit2.Response
 import java.lang.IllegalArgumentException
 

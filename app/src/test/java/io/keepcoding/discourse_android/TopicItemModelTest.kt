@@ -1,6 +1,9 @@
 package io.keepcoding.discourse_android
 
-import io.keepcoding.discourse_android.Data.Models.*
+import io.keepcoding.discourse_android.Data.Models.AppModels.Poster
+import io.keepcoding.discourse_android.Data.Models.AppModels.TopicItem
+import io.keepcoding.discourse_android.Data.Models.ResponseModels.TopicsItem
+import io.keepcoding.discourse_android.Data.Models.ResponseModels.UsersItem
 import junit.framework.Assert.assertEquals
 import org.junit.Test
 import java.text.SimpleDateFormat
@@ -15,7 +18,8 @@ class TopicItemModelTest {
            date = formatDate("01/01/2019 10:00:00")
        )
 
-       val offSet = testTopic.getTimeOffset(dateToCompare)
+       var utils = Utils()
+       val offSet = utils.getTimeOffset(itemDate = testTopic.date)
        assertEquals("Amount comparision", 1, offSet.amount)
        assertEquals("Unit comparison", Calendar.YEAR, offSet.unit)
    }

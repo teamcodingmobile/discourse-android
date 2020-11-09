@@ -10,8 +10,10 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import io.keepcoding.discourse_android.Data.Models.TopicItem
+import io.keepcoding.discourse_android.Data.Models.AppModels.TimeOffset
+import io.keepcoding.discourse_android.Data.Models.AppModels.TopicItem
 import io.keepcoding.discourse_android.R
+import io.keepcoding.discourse_android.Utils
 import kotlinx.android.synthetic.main.item_topic.view.*
 import java.util.*
 
@@ -43,6 +45,7 @@ class TopicsAdapter(private val context: Context, private val callbackTopicClick
     inner class TopicHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val myCustomFontBold : Typeface? = ResourcesCompat.getFont(context, R.font.avenir_next_bold)
         val myCustomFontRegular : Typeface? = ResourcesCompat.getFont(context, R.font.avenir_next_regular)
+        var utils = Utils()
         var topic: TopicItem? = null
             set(value) {
                 field = value
@@ -61,7 +64,8 @@ class TopicsAdapter(private val context: Context, private val callbackTopicClick
                     itemView.labelReplies.text = it.replies.toString()
                     itemView.linearLayout.setBackgroundColor(Color.parseColor("#F8F8F8"))
                     itemView.posterUsername.text = it.poster?.username.toString()
-                    setTimeOffset(it.getTimeOffset())
+                    var timeOffset = utils.getTimeOffset(it.date)
+                    setTimeOffset(timeOffset)
 
                     Glide.with(context)
                             .load(it.poster?.URL)
@@ -74,7 +78,7 @@ class TopicsAdapter(private val context: Context, private val callbackTopicClick
                 }
             }
 
-        private fun setTimeOffset(timeOffset: TopicItem.TimeOffset) {
+        private fun setTimeOffset(timeOffset: TimeOffset) {
 
             val quantityString = when (timeOffset.unit) {
                 Calendar.YEAR -> R.plurals.years
