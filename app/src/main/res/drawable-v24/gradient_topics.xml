@@ -6,6 +6,6 @@
     android:layout_width="match_parent">
     <gradient
         android:angle="180"
-        android:endColor="@color/gradientEnd"
-        android:startColor="@color/gradientStart" />
+        android:endColor="@color/gradientTopicEnd"
+        android:startColor="@color/gradientTopicStart" />
 </shape>

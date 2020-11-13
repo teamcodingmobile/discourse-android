@@ -6,14 +6,14 @@ import android.os.Bundle
 import com.google.android.material.tabs.TabLayout
 import io.keepcoding.discourse_android.R
 import io.keepcoding.discourse_android.UI.topics.TopicsFragment
-import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.tabs_activity.*
 
-class MainActivity : AppCompatActivity(), TopicsFragment.TopicsInteractionListener {
+class TabsActivity : AppCompatActivity(), TopicsFragment.TopicsInteractionListener {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.tabs_activity)
         setSupportActionBar(findViewById(R.id.toolbar))
 
         tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.ic_tab_topics))
