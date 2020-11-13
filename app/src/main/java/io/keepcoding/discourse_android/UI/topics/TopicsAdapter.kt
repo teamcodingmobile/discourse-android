@@ -10,12 +10,10 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import io.keepcoding.discourse_android.Data.Models.AppModels.TimeOffset
 import io.keepcoding.discourse_android.Data.Models.AppModels.TopicItem
 import io.keepcoding.discourse_android.R
 import io.keepcoding.discourse_android.Utils
 import kotlinx.android.synthetic.main.item_topic.view.*
-import java.util.*
 
 
 class TopicsAdapter(private val context: Context, private val callbackTopicClick: CallbackTopicClick, private val topicList: List<TopicItem>?): RecyclerView.Adapter<TopicsAdapter.TopicHolder>() {
@@ -34,11 +32,10 @@ class TopicsAdapter(private val context: Context, private val callbackTopicClick
         topicList?.get(position).let { topic ->
 
             holder.itemView.setOnClickListener {
-                callbackTopicClick.onItemClick(topic!!)
+                callbackTopicClick.onItemClick(topic?.id!!)
             }
             holder.topic = topic
         }
-
 
     }
 
@@ -65,7 +62,7 @@ class TopicsAdapter(private val context: Context, private val callbackTopicClick
                     itemView.linearLayout.setBackgroundColor(Color.parseColor("#F8F8F8"))
                     itemView.posterUsername.text = it.poster?.username.toString()
                     var timeOffset = utils.getTimeOffset(it.date)
-                    setTimeOffset(timeOffset)
+                    itemView.labelDate.text = utils.setTimeOffset(timeOffset, context)
 
                     Glide.with(context)
                             .load(it.poster?.URL)
@@ -78,28 +75,6 @@ class TopicsAdapter(private val context: Context, private val callbackTopicClick
                 }
             }
 
-        private fun setTimeOffset(timeOffset: TimeOffset) {
-
-            val quantityString = when (timeOffset.unit) {
-                Calendar.YEAR -> R.plurals.years
-                Calendar.MONTH -> R.plurals.months
-                Calendar.DAY_OF_MONTH -> R.plurals.days
-                Calendar.HOUR -> R.plurals.hours
-                else -> R.plurals.minutes
-            }
-
-            if (timeOffset.amount == 0) {
-                itemView.labelDate.text =
-                    itemView.context.resources.getString(R.string.minutes_zero)
-            } else {
-                itemView.labelDate.text =
-                    itemView.context.resources.getQuantityString(
-                        quantityString,
-                        timeOffset.amount,
-                        timeOffset.amount
-                    )
-            }
-        }
     }
 
 }

@@ -1,10 +1,12 @@
 package io.keepcoding.discourse_android.Data.Client.Http
 
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+
 
 class DiscourseService {
 
@@ -19,8 +21,13 @@ class DiscourseService {
 
         val timeout: Long = 6 * 1000
 
+        val logging = HttpLoggingInterceptor()
+        logging.setLevel(HttpLoggingInterceptor.Level.BASIC)
+
+
         val client = OkHttpClient.Builder()
             .connectTimeout(timeout, TimeUnit.MILLISECONDS)
+            .addInterceptor(logging)
             .writeTimeout(timeout, TimeUnit.MILLISECONDS)
             .readTimeout(timeout, TimeUnit.MILLISECONDS)
             .build()
@@ -28,6 +35,7 @@ class DiscourseService {
         val retrofit = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl("https://mdiscourse.keepcoding.io")
+            .client(client)
             .build()
 
         discourseApi = retrofit.create(DiscourseApi::class.java)

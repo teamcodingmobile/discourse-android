@@ -20,6 +20,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".UI.topics.topic_detail.TopicDetailActivity"
+            android:theme="@style/Theme.Discourseandroid"/>
+
     </application>
 
 </manifest>
