@@ -1,13 +1,12 @@
 package io.keepcoding.discourse_android.UI.topics
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
-import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +16,7 @@ import io.keepcoding.discourse_android.Data.Client.Http.DiscourseService
 import io.keepcoding.discourse_android.Data.Models.AppModels.TopicItem
 import io.keepcoding.discourse_android.Data.Models.ResponseModels.LatestTopicResponse
 import io.keepcoding.discourse_android.R
+import io.keepcoding.discourse_android.UI.topics.topic_detail.TopicDetailActivity
 import kotlinx.android.synthetic.main.topics_fragment.*
 import kotlinx.android.synthetic.main.view_topics_error.*
 import retrofit2.Response
@@ -49,8 +49,6 @@ class TopicsFragment() : Fragment(), CallbackTopicClick {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val myCustomFont : Typeface? = ResourcesCompat.getFont(requireContext(), R.font.avenir_next_bold)
-        toolbar_text.typeface = myCustomFont
         init()
     }
 
@@ -58,7 +56,6 @@ class TopicsFragment() : Fragment(), CallbackTopicClick {
         listTopics.layoutManager = LinearLayoutManager(activity)
         listTopics.isNestedScrollingEnabled = false
         listTopics.setHasFixedSize(false)
-
         buttonCreate.setOnClickListener {
             this.topicsInteractionListener?.onCreateTopic()
         }
@@ -116,11 +113,15 @@ class TopicsFragment() : Fragment(), CallbackTopicClick {
 
     interface TopicsInteractionListener {
         fun onCreateTopic()
-        fun onItemClick(topicId: String)
     }
 
     override fun onItemClick(topicId: String) {
-        topicsInteractionListener?.onItemClick(topicId)
+        context?.let { fragment ->
+            val intent = Intent(fragment, TopicDetailActivity::class.java).apply {
+                putExtra("TOPIC_ID", topicId)
+            }
+            startActivity(intent)
+        }
     }
 
 }

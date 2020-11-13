@@ -32,4 +32,5 @@ class ViewPageAdapter(var context: Context, supportFragmentManager: FragmentMana
         return totalTabs
     }
 
+
 }

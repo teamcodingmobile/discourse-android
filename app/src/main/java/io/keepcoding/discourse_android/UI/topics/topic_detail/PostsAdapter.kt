@@ -2,7 +2,6 @@ package io.keepcoding.discourse_android.UI.topics.topic_detail
 
 import android.content.Context
 import android.graphics.Typeface
-import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

@@ -1,5 +1,6 @@
 package io.keepcoding.discourse_android.UI.topics.topic_detail
 
+import android.app.Activity
 import android.app.Application
 import android.graphics.Color
 import android.graphics.Typeface
@@ -7,7 +8,6 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.res.ResourcesCompat
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -41,10 +41,10 @@ class TopicDetailViewModel(private val context: Application) : ViewModel()  {
         return SingleTopicItem.parseTopic(response)
     }
 
-    fun showTopic (context: Fragment,topic: SingleTopicItem?, photo: AppCompatImageView, poster: TextView,
+    fun showTopic (context: Activity,topic: SingleTopicItem?, photo: AppCompatImageView, poster: TextView,
                    date: TextView, title: TextView, views: TextView, replies: TextView, posts: TextView, linearLayout: LinearLayout) {
-        val myCustomFontBold : Typeface? = ResourcesCompat.getFont(context.requireContext(), R.font.avenir_next_bold)
-        val myCustomFontRegular : Typeface? = ResourcesCompat.getFont(context.requireContext(), R.font.avenir_next_regular)
+        val myCustomFontBold : Typeface? = ResourcesCompat.getFont(context, R.font.avenir_next_bold)
+        val myCustomFontRegular : Typeface? = ResourcesCompat.getFont(context, R.font.avenir_next_regular)
         var utils = Utils()
 
         title.typeface = myCustomFontRegular
@@ -60,7 +60,7 @@ class TopicDetailViewModel(private val context: Application) : ViewModel()  {
         linearLayout.setBackgroundColor(Color.parseColor("#F8F8F8"))
         poster.text = topic?.poster?.username.toString()
         var timeOffset = utils.getTimeOffset(topic!!.date)
-        date.text = utils.setTimeOffset(timeOffset, context.requireContext())
+        date.text = utils.setTimeOffset(timeOffset, context)
 
         Glide.with(context)
                 .load(topic?.poster?.URL)
