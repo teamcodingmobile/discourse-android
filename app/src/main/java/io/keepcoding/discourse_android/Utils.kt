@@ -1,6 +1,9 @@
 package io.keepcoding.discourse_android
 
+import android.content.Context
 import io.keepcoding.discourse_android.Data.Models.AppModels.TimeOffset
+import kotlinx.android.synthetic.main.item_topic.view.*
+import java.text.SimpleDateFormat
 import java.util.*
 
 class Utils {
@@ -50,5 +53,38 @@ class Utils {
                 0,
                 Calendar.MINUTE
         )
+    }
+
+    fun getURL(forString: String?) : String {
+        val sized = forString?.replace(oldValue = "{size}", newValue = "80")
+        return "https://mdiscourse.keepcoding.io$sized"
+    }
+
+    fun formatDate(date: String?) : Date {
+        val dateReplaced = date?.replace("Z", "+0000") ?: ""
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.getDefault())
+        val dateFormatted = dateFormat.parse(dateReplaced) ?: Date()
+        return dateFormatted
+    }
+
+    fun setTimeOffset(timeOffset: TimeOffset, context: Context) : String {
+
+        val quantityString = when (timeOffset.unit) {
+            Calendar.YEAR -> R.plurals.years
+            Calendar.MONTH -> R.plurals.months
+            Calendar.DAY_OF_MONTH -> R.plurals.days
+            Calendar.HOUR -> R.plurals.hours
+            else -> R.plurals.minutes
+        }
+
+        if (timeOffset.amount == 0) {
+            return R.string.minutes_zero.toString()
+        } else {
+            return context.resources.getQuantityString(
+                    quantityString,
+                    timeOffset.amount,
+                    timeOffset.amount
+            )
+        }
     }
 }

@@ -5,6 +5,9 @@
     <string name="topics_error_retry">RETRY</string>
     <string name="minutes_zero">Just now</string>
     <string name="topics">Topics</string>
+    <string name="gradient">Gradient</string>
+    <string name="topic">Topic</string>
+    <string name="add_topic">Add topic</string>
     <plurals name="years">
         <item quantity="one">%d year ago</item>
         <item quantity="other">%d years ago</item>

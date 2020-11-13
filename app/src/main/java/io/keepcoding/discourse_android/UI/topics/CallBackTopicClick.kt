@@ -4,5 +4,5 @@ import io.keepcoding.discourse_android.Data.Models.AppModels.TopicItem
 
 
 interface CallbackTopicClick {
-    fun onItemClick(topic: TopicItem)
+    fun onItemClick(topicId: String)
 }

@@ -16,6 +16,7 @@ class ViewPageAdapter(var context: Context, supportFragmentManager: FragmentMana
         return when (position) {
             0 -> {
                 TopicsFragment()
+                
             }
             1 -> {
                 SearchFragment()

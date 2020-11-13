@@ -10,19 +10,6 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class TopicItemModelTest {
-   @Test
-   fun getOffset_year_isCorrect() {
-       val dateToCompare: Date = formatDate("01/01/2020 10:00:00")
-       val testTopic = TopicItem(
-           title = "Test",
-           date = formatDate("01/01/2019 10:00:00")
-       )
-
-       var utils = Utils()
-       val offSet = utils.getTimeOffset(itemDate = testTopic.date)
-       assertEquals("Amount comparision", 1, offSet.amount)
-       assertEquals("Unit comparison", Calendar.YEAR, offSet.unit)
-   }
 
     @Test
     fun parseUserIsCorrect() {
@@ -39,6 +26,7 @@ class TopicItemModelTest {
 
     @Test
     fun parseTopicIsCorrect() {
+        val utils = Utils()
         val testTopic = TopicsItem (
                 id = 7,
                 title = "Welcome to Discourse",
@@ -61,16 +49,7 @@ class TopicItemModelTest {
         assertEquals("userTest", topic.poster?.username)
         assertEquals("URLTest", topic.poster?.URL)
 
-        // "2019-12-12T01:41:28.809Z"
-        val formatter = SimpleDateFormat("dd/MM/yyyy hh:mm:ss")
-        val dateFormatted = formatter.format(topic.date)  //12/12/2019 01:41:28
-        assertEquals("12/12/2019 02:41:28", dateFormatted)
-
     }
 
-    private fun formatDate(date: String) : Date {
-        val formatter = SimpleDateFormat("dd/MM/yyyy hh:mm:ss")
-        return formatter.parse(date) ?: throw IllegalArgumentException("Date $date has an incorrect format, try again with format dd/MM/yyyy hh:mm:ss")
-    }
 
 }

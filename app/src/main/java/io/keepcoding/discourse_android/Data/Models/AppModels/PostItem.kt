@@ -2,7 +2,7 @@ package io.keepcoding.discourse_android.Data.Models.AppModels
 
 import java.util.*
 
-data class Post (
+data class PostItem (
         val username: String = "",
         val URL: String = "",
         val date: Date = Date(),

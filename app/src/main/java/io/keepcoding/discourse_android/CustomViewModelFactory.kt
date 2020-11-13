@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import io.keepcoding.discourse_android.UI.topics.TopicsFragmentViewModel
+import io.keepcoding.discourse_android.UI.topics.topic_detail.TopicDetailViewModel
 import java.lang.IllegalArgumentException
 
 class CustomViewModelFactory(private val application: Application) :
@@ -13,6 +14,7 @@ class CustomViewModelFactory(private val application: Application) :
         return with(modelClass) {
             when {
                 isAssignableFrom(TopicsFragmentViewModel::class.java) -> TopicsFragmentViewModel(application)
+                isAssignableFrom(TopicDetailViewModel::class.java) -> TopicDetailViewModel(application)
                 else -> throw IllegalArgumentException("Unknown ViewModel")
             }
         } as T

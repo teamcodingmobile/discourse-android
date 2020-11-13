@@ -3,7 +3,7 @@ package io.keepcoding.discourse_android.Data.Models.AppModels
 import io.keepcoding.discourse_android.Data.Models.ResponseModels.LatestTopicResponse
 import io.keepcoding.discourse_android.Data.Models.ResponseModels.TopicsItem
 import io.keepcoding.discourse_android.Data.Models.ResponseModels.UsersItem
-import java.text.SimpleDateFormat
+import io.keepcoding.discourse_android.Utils
 import java.util.*
 
 data class TopicItem(
@@ -17,6 +17,7 @@ data class TopicItem(
 ) {
 
     companion object {
+        var utils = Utils()
 
         fun parseTopicsList(response: LatestTopicResponse): List<TopicItem> {
             val objectList = response.topicList?.topics!!
@@ -44,10 +45,8 @@ data class TopicItem(
         }
 
         fun parseUser (user: UsersItem?): Poster {
-
             val avatarTemplate = user?.avatarTemplate
-            val sized = avatarTemplate?.replace(oldValue = "{size}", newValue = "80")
-            val userURL = "https://mdiscourse.keepcoding.io$sized"
+            val userURL = utils.getURL(avatarTemplate)
 
             return Poster (
                     username = user?.username ?: "",
@@ -56,16 +55,11 @@ data class TopicItem(
         }
 
         fun parseTopic(topic: TopicsItem?, poster: Poster?): TopicItem {
-            val date = topic?.createdAt
-                    ?.replace("Z", "+0000") ?: ""
-
-            val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.getDefault())
-            val dateFormatted = dateFormat.parse(date) ?: Date()
-
+            val date = utils.formatDate(topic?.createdAt)
             return TopicItem(
                     id = topic?.id.toString(),
                     title = topic?.title ?: "",
-                    date = dateFormatted,
+                    date = date,
                     posts = topic?.postsCount ?: 0,
                     views = topic?.views ?: 0,
                     replies = topic?.replyCount ?: 0,
