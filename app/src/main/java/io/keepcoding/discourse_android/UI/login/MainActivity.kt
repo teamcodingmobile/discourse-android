@@ -9,7 +9,9 @@ import android.view.WindowManager
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
+import io.keepcoding.discourse_android.Data.LoginService
 import io.keepcoding.discourse_android.R
+import io.keepcoding.discourse_android.UI.TabsActivity
 import io.keepcoding.discourse_android.isFirstTimeCreated
 import kotlinx.android.synthetic.main.main_activity.*
 import java.util.*
@@ -19,6 +21,7 @@ class MainActivity : AppCompatActivity(){
     private val textList = arrayOf("community","team","customers","fans")
     private var counter = 0
     private val timer = Timer()
+    private val loginService = LoginService()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +30,7 @@ class MainActivity : AppCompatActivity(){
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         if (isFirstTimeCreated(savedInstanceState)) {
-            //checkSession()
+            checkSession()
         }
         init()
 
@@ -39,6 +42,12 @@ class MainActivity : AppCompatActivity(){
         login_button.setOnClickListener(){
             val intent = Intent(this, SignInActivity::class.java)
             startActivity(intent)
+        }
+    }
+
+    private fun checkSession() {
+        if (loginService.isLogged(this.applicationContext)) {
+            goToTopics()
         }
     }
 
@@ -60,18 +69,22 @@ class MainActivity : AppCompatActivity(){
 
         timer.schedule(object : TimerTask() {
             override fun run() {
-                this@MainActivity.runOnUiThread(java.lang.Runnable {
+                this@MainActivity.runOnUiThread{
                     if (counter == textList.size){
                         counter = 0
                     }
                     text_switcher.setText(textList[counter])
                     counter += 1
-                })
+                }
 
             }
         }, 100, 1000)
 
     }
 
+    private fun goToTopics(){
+        val intent = Intent(this, TabsActivity::class.java)
+        startActivity(intent)
+    }
 
 }
