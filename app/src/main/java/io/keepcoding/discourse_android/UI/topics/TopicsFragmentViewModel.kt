@@ -18,7 +18,7 @@ class TopicsFragmentViewModel(private val context: Application) : ViewModel() {
                 if (response.body() != null) {
                     cb.onResponse(response.body()!!)
                 } else {
-                    cb.onFailure(Throwable("error"), response)
+                    cb.onFailure(Throwable("error"), response, code = response.code())
                 }
             }
             override fun onFailure(call: Call<LatestTopicResponse>, t: Throwable) {

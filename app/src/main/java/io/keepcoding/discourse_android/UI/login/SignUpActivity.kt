@@ -53,14 +53,13 @@ class SignUpActivity : AppCompatActivity(){
                 )
 
                 mViewModel.signUp(object: DiscourseService.CallbackResponse<SignUpResponse>{
-                    override fun onResponse(response: SignUpResponse){
-                        enableLoading(false)
-                        handleResponse(response, username = inputSignUpUsername.text.toString())
+                    override fun onFailure(t: Throwable, res: Response<*>?, code: Int) {
+                        throw (t)
                     }
 
-                    override fun onFailure(t: Throwable, res: Response<*>?) {
-                        throw (t)
-
+                    override fun onResponse(response: SignUpResponse) {
+                        enableLoading(false)
+                        handleResponse(response, username = inputSignUpUsername.text.toString())
                     }
 
                 },  body = signUpModel)
@@ -68,8 +67,6 @@ class SignUpActivity : AppCompatActivity(){
             } else {
                 showErrors()
             }
-            //val intent = Intent(this, TabsActivity::class.java)
-            //startActivity(intent)
         }
 
     }

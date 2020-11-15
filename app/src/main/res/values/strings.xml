@@ -27,6 +27,9 @@
     <string name="error_empty">\"This field cannot be empty\"</string>
     <string name="error_short">\"Password is too short (minimum is 10 characters)\"</string>
     <string name="message_sign_up">\"User created\"</string>
+    <string name="user_not_found">User not found, please sign up</string>
+    <string name="error_unauthorized">Unauthorized. Response code: 403</string>
+    <string name="error_server">Server error. Response code: 500</string>
     <plurals name="years">
         <item quantity="one">%d year ago</item>
         <item quantity="other">%d years ago</item>

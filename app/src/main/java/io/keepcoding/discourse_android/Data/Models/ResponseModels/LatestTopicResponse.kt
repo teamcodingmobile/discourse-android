@@ -3,15 +3,13 @@ package io.keepcoding.discourse_android.Data.Models.ResponseModels
 import com.google.gson.annotations.SerializedName
 
 import java.io.Serializable
-import java.text.SimpleDateFormat
-import java.util.*
 
 data class LatestTopicResponse(
 
-		@field:SerializedName("topic_list")
+	@field:SerializedName("topic_list")
 	val topicList: TopicList? = null,
 
-		@field:SerializedName("users")
+	@field:SerializedName("users")
 	val users: List<UsersItem?>? = null
 ): Serializable
 

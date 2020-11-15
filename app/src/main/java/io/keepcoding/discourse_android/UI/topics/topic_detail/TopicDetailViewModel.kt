@@ -63,7 +63,7 @@ class TopicDetailViewModel(private val context: Application) : ViewModel()  {
         date.text = utils.setTimeOffset(timeOffset, context)
 
         Glide.with(context)
-                .load(topic?.poster?.URL)
+                .load(topic.poster?.URL)
                 .circleCrop()
                 .apply(
                         RequestOptions()

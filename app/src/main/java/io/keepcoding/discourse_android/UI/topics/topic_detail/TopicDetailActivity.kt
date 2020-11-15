@@ -63,8 +63,8 @@ class TopicDetailActivity: AppCompatActivity() {
                     listPost.adapter = postAdapter
                 }
 
-                override fun onFailure(t: Throwable, res: Response<*>?) {
-
+                override fun onFailure(t: Throwable, res: Response<*>?, code: Int) {
+                    throw (t)
                 }
             }, topicId = topicId!!)
         }

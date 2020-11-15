@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
+import io.keepcoding.discourse_android.Data.Models.AppModels.SignInModel
 import io.keepcoding.discourse_android.R
 import io.keepcoding.discourse_android.inflate
 import kotlinx.android.synthetic.main.signin_fragment.*
@@ -39,7 +40,15 @@ class SignInFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         init()
         login_button.setOnClickListener(){
-            signInInteractionListener?.onLogin()
+            if (isFormValid()){
+                var model = SignInModel(
+                        inputSignInUsername.text.toString(),
+                        inputSignInPassword.text.toString()
+                )
+                signInInteractionListener?.onLogin(model)
+            } else {
+                showErrors()
+            }
         }
 
         recover_button.setOnClickListener(){
@@ -52,14 +61,26 @@ class SignInFragment: Fragment() {
         val myCustomFontBold : Typeface? = ResourcesCompat.getFont(requireContext(), R.font.avenir_next_bold)
         val myCustomFontRegular : Typeface? = ResourcesCompat.getFont(requireContext(), R.font.avenir_next_regular)
         createText.typeface = myCustomFontBold
-        inputSignUpUsername.typeface = myCustomFontRegular
-        inputSignUpPassword.typeface = myCustomFontRegular
+        inputSignInUsername.typeface = myCustomFontRegular
+        inputSignInPassword.typeface = myCustomFontRegular
         login_button.typeface = myCustomFontRegular
     }
 
     interface SignInInteractionListener {
-        fun onLogin()
+        fun onLogin(model: SignInModel)
         fun onRecoverPassword()
+    }
+
+    private fun isFormValid(): Boolean {
+        return inputSignInUsername.text.isNotEmpty() && inputSignInPassword.text.isNotEmpty()
+    }
+
+    private fun showErrors(){
+        if (inputSignInUsername.text.isEmpty())
+            inputSignInUsername.error = getString(R.string.error_empty)
+
+        if (inputSignInPassword.text.isEmpty())
+            inputSignInPassword.error = getString(R.string.error_empty)
     }
 
 
