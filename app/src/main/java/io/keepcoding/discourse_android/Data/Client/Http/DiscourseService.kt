@@ -1,5 +1,6 @@
 package io.keepcoding.discourse_android.Data.Client.Http
 
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
@@ -22,15 +23,26 @@ class DiscourseService {
         val timeout: Long = 6 * 1000
 
         val logging = HttpLoggingInterceptor()
-        logging.setLevel(HttpLoggingInterceptor.Level.BASIC)
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY)
 
 
-        val client = OkHttpClient.Builder()
-            .connectTimeout(timeout, TimeUnit.MILLISECONDS)
+        val client = OkHttpClient.Builder().apply{
+            addInterceptor(
+                    Interceptor { chain ->
+                        val builder = chain.request().newBuilder()
+                        builder.header("Api-Key", API_KEY)
+                        builder.header("Api-Username", API_USERNAME)
+                        return@Interceptor chain.proceed(builder.build())
+                    }
+            )
+        }
             .addInterceptor(logging)
+
+            .connectTimeout(timeout, TimeUnit.MILLISECONDS)
             .writeTimeout(timeout, TimeUnit.MILLISECONDS)
             .readTimeout(timeout, TimeUnit.MILLISECONDS)
             .build()
+
 
         val retrofit = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())

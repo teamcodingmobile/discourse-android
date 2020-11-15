@@ -24,6 +24,9 @@
     <string name="recover_password">Recover password</string>
     <string name="back_to_login">Back to login</string>
     <string name="send_email">Send email</string>
+    <string name="error_empty">\"This field cannot be empty\"</string>
+    <string name="error_short">\"Password is too short (minimum is 10 characters)\"</string>
+    <string name="message_sign_up">\"User created\"</string>
     <plurals name="years">
         <item quantity="one">%d year ago</item>
         <item quantity="other">%d years ago</item>
