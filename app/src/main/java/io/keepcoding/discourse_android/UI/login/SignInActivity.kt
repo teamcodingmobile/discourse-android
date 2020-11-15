@@ -107,15 +107,19 @@ class SignInActivity : AppCompatActivity(),
     private fun handleError(code:Int){
         if (code == 404){
             Snackbar.make(signInContainer, getString(R.string.user_not_found), Snackbar.LENGTH_LONG).show()
+            return
         }
         if (code == 403){
             Snackbar.make(signInContainer, getString(R.string.error_unauthorized), Snackbar.LENGTH_LONG).show()
+            return
         }
         if (code == 500){
             Snackbar.make(signInContainer, getString(R.string.error_server), Snackbar.LENGTH_LONG).show()
+            return
         }
         else {
             Snackbar.make(signInContainer, "Unexpected error. Response code: $code", Snackbar.LENGTH_LONG).show()
+            return
         }
     }
 
