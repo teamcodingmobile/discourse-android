@@ -41,11 +41,11 @@ class SignInFragment: Fragment() {
         init()
         login_button.setOnClickListener(){
             if (isFormValid()){
-                var model = SignInModel(
+                var form = SignInModel(
                         inputSignInUsername.text.toString(),
                         inputSignInPassword.text.toString()
                 )
-                signInInteractionListener?.onLogin(model)
+                signInInteractionListener?.onLogin(form)
             } else {
                 showErrors()
             }
@@ -67,7 +67,7 @@ class SignInFragment: Fragment() {
     }
 
     interface SignInInteractionListener {
-        fun onLogin(model: SignInModel)
+        fun onLogin(form: SignInModel)
         fun onRecoverPassword()
     }
 

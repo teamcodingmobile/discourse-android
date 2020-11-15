@@ -30,6 +30,8 @@
     <string name="user_not_found">User not found, please sign up</string>
     <string name="error_unauthorized">Unauthorized. Response code: 403</string>
     <string name="error_server">Server error. Response code: 500</string>
+    <string name="reset_success">Please check your email to finish the process</string>
+    <string name="reset_failure">User not found, please sign up</string>
     <plurals name="years">
         <item quantity="one">%d year ago</item>
         <item quantity="other">%d years ago</item>

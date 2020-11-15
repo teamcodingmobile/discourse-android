@@ -11,8 +11,8 @@ import retrofit2.Response
 
 class SignUpViewModel(private val context: Application) : ViewModel()  {
 
-    fun signUp(cb: DiscourseService.CallbackResponse<SignUpResponse>, body: SignUpModel) {
-        DiscourseService().discourseApi.createUser(body = body).enqueue(object : Callback<SignUpResponse> {
+    fun signUp(cb: DiscourseService.CallbackResponse<SignUpResponse>, form: SignUpModel) {
+        DiscourseService().discourseApi.createUser(form).enqueue(object : Callback<SignUpResponse> {
             override fun onResponse(call: Call<SignUpResponse>, response: Response<SignUpResponse>) {
                 if (response.body() != null) {
                     cb.onResponse(response.body()!!)

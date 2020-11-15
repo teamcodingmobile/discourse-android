@@ -9,20 +9,18 @@ import com.google.android.material.snackbar.Snackbar
 import io.keepcoding.discourse_android.CustomViewModelFactory
 import io.keepcoding.discourse_android.Data.Client.Http.DiscourseService
 import io.keepcoding.discourse_android.Data.LoginService
+import io.keepcoding.discourse_android.Data.Models.AppModels.ResetPasswordModel
 import io.keepcoding.discourse_android.Data.Models.AppModels.SignInModel
+import io.keepcoding.discourse_android.Data.Models.ResponseModels.ResetPasswordResponse
 import io.keepcoding.discourse_android.Data.Models.ResponseModels.SignInResponse
-import io.keepcoding.discourse_android.Data.Models.ResponseModels.SingleTopicResponse
+import io.keepcoding.discourse_android.Data.Models.ResponseModels.SignUpResponse
 import io.keepcoding.discourse_android.R
 import io.keepcoding.discourse_android.UI.TabsActivity
-import io.keepcoding.discourse_android.UI.topics.topic_detail.PostAdapter
-import io.keepcoding.discourse_android.UI.topics.topic_detail.TopicDetailViewModel
 import kotlinx.android.synthetic.main.signin_activity.*
 import kotlinx.android.synthetic.main.signin_activity.back_button
 import kotlinx.android.synthetic.main.signin_activity.container
 import kotlinx.android.synthetic.main.signin_activity.viewLoading
 import kotlinx.android.synthetic.main.signin_fragment.*
-import kotlinx.android.synthetic.main.signup_activity.*
-import kotlinx.android.synthetic.main.topic_detail_activity.*
 import retrofit2.Response
 
 class SignInActivity : AppCompatActivity(),
@@ -54,12 +52,12 @@ class SignInActivity : AppCompatActivity(),
 
     }
 
-    override fun onLogin(model: SignInModel) {
+    override fun onLogin(form: SignInModel) {
         enableLoading()
         mViewModel.login(object: DiscourseService.CallbackResponse<SignInResponse>{
             override fun onResponse(response: SignInResponse) {
                 enableLoading(false)
-                handleResponse(username = inputSignInUsername.text.toString())
+                handleLoginResponse(username = inputSignInUsername.text.toString())
             }
 
             override fun onFailure(t: Throwable, res: Response<*>?, code: Int) {
@@ -67,7 +65,7 @@ class SignInActivity : AppCompatActivity(),
                 handleError(code)
             }
 
-        }, username = model.username)
+        }, username = form.username)
     }
 
     override fun onRecoverPassword() {
@@ -82,10 +80,19 @@ class SignInActivity : AppCompatActivity(),
                 .commit()
     }
 
-    override fun onSendEmail() {
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
-        //llamar a la api y volver a sign in (mostrando mensaje)
+    override fun onSendEmail(form: ResetPasswordModel) {
+        enableLoading()
+        mViewModel.resetPassword(object: DiscourseService.CallbackResponse<ResetPasswordResponse>{
+            override fun onResponse(response: ResetPasswordResponse) {
+                enableLoading(false)
+                handleResetResponse(response)
+            }
+            override fun onFailure(t: Throwable, res: Response<*>?, code: Int) {
+                enableLoading(false)
+                Snackbar.make(container, "Error, Status code: $code", Snackbar.LENGTH_LONG).show()
+            }
+
+        },  form = form)
     }
 
     private fun enableLoading(enabled: Boolean = true)  {
@@ -98,10 +105,22 @@ class SignInActivity : AppCompatActivity(),
         }
     }
 
-    private fun handleResponse(username: String){
+    private fun handleLoginResponse(username: String){
             loginService.saveSession(this, username)
             val intent = Intent(this, TabsActivity::class.java)
             startActivity(intent)
+    }
+
+    private fun handleResetResponse(response: ResetPasswordResponse){
+        //TODO - falta probarlo
+        if (response.userFound == true){
+            supportFragmentManager.beginTransaction()
+                    .replace(R.id.container, signInFragment)
+                    .commit()
+            Snackbar.make(container, getString(R.string.reset_success), Snackbar.LENGTH_LONG).show()
+        } else {
+            Snackbar.make(container, getString(R.string.reset_failure), Snackbar.LENGTH_LONG).show()
+        }
     }
 
     private fun handleError(code:Int){

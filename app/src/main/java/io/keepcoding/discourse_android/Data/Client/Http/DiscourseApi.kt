@@ -1,10 +1,8 @@
 package io.keepcoding.discourse_android.Data.Client.Http
 
+import io.keepcoding.discourse_android.Data.Models.AppModels.ResetPasswordModel
 import io.keepcoding.discourse_android.Data.Models.AppModels.SignUpModel
-import io.keepcoding.discourse_android.Data.Models.ResponseModels.LatestTopicResponse
-import io.keepcoding.discourse_android.Data.Models.ResponseModels.SignInResponse
-import io.keepcoding.discourse_android.Data.Models.ResponseModels.SignUpResponse
-import io.keepcoding.discourse_android.Data.Models.ResponseModels.SingleTopicResponse
+import io.keepcoding.discourse_android.Data.Models.ResponseModels.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -22,4 +20,8 @@ interface DiscourseApi {
 
     @GET ("t/{topicId}.json")
     fun fetchSingleTopic(@Path("topicId") topicId: String) : Call<SingleTopicResponse>
+
+    @POST("session/forgot_password")
+    fun resetPassword(@Body body: ResetPasswordModel) : Call <ResetPasswordResponse>
+
 }

@@ -8,9 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
+import io.keepcoding.discourse_android.Data.Models.AppModels.ResetPasswordModel
 import io.keepcoding.discourse_android.R
 import io.keepcoding.discourse_android.inflate
 import kotlinx.android.synthetic.main.recover_fragment.*
+import kotlinx.android.synthetic.main.recover_fragment.createText
+import kotlinx.android.synthetic.main.signin_fragment.*
 import java.lang.IllegalArgumentException
 
 class RecoverFragment: Fragment() {
@@ -43,7 +46,15 @@ class RecoverFragment: Fragment() {
         }
 
         email_button.setOnClickListener(){
-            recoverInteractionListener?.onSendEmail()
+            if (isFormValid()){
+                val form = ResetPasswordModel(
+                        inputRecoverUsername.text.toString()
+                )
+                recoverInteractionListener?.onSendEmail(form)
+            } else {
+                showErrors()
+            }
+
         }
 
     }
@@ -52,13 +63,22 @@ class RecoverFragment: Fragment() {
         val myCustomFontBold : Typeface? = ResourcesCompat.getFont(requireContext(), R.font.avenir_next_bold)
         val myCustomFontRegular : Typeface? = ResourcesCompat.getFont(requireContext(), R.font.avenir_next_regular)
         createText.typeface = myCustomFontBold
-        inputSignUpUsername.typeface = myCustomFontRegular
+        inputRecoverUsername.typeface = myCustomFontRegular
         email_button.typeface = myCustomFontRegular
+    }
+
+    private fun isFormValid(): Boolean {
+        return inputRecoverUsername.text.isNotEmpty()
+    }
+
+    private fun showErrors(){
+        if (inputRecoverUsername.text.isEmpty())
+            inputRecoverUsername.error = getString(R.string.error_empty)
     }
 
     interface RecoverInteractionListener {
         fun onBackToLogin()
-        fun onSendEmail()
+        fun onSendEmail(form: ResetPasswordModel)
     }
 
 }
