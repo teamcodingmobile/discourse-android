@@ -1,5 +1,6 @@
 package io.keepcoding.discourse_android.Data.Models.AppModels
 
+import java.io.Serializable
 import java.util.*
 
 data class PostItem (
@@ -7,4 +8,4 @@ data class PostItem (
         val URL: String = "",
         val date: Date = Date(),
         val content: String = ""
-)
+): Serializable

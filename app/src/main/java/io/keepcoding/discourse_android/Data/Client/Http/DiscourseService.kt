@@ -30,7 +30,7 @@ class DiscourseService(context: Context) {
         val timeout: Long = 6 * 1000
 
         val logging = HttpLoggingInterceptor()
-        logging.setLevel(HttpLoggingInterceptor.Level.BODY)
+        logging.setLevel(HttpLoggingInterceptor.Level.BASIC)
 
 
         val client = OkHttpClient.Builder().apply{

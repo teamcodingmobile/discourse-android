@@ -27,6 +27,8 @@ interface DiscourseApi {
 
     @POST ("posts.json")
     fun createTopic(@Body body: PostModel) : Call <PostResponse>
+
+    @POST ("posts.json")
     fun replyTopic(@Body body: PostModel) : Call <PostResponse>
 
 }
