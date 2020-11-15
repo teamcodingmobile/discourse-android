@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import io.keepcoding.discourse_android.CustomViewModelFactory
 import io.keepcoding.discourse_android.Data.Client.Http.DiscourseService
+import io.keepcoding.discourse_android.Data.LoginService
 import io.keepcoding.discourse_android.Data.Models.AppModels.SignUpModel
 import io.keepcoding.discourse_android.Data.Models.ResponseModels.SignUpResponse
 import io.keepcoding.discourse_android.R
@@ -27,6 +28,8 @@ class SignUpActivity : AppCompatActivity(){
         val factory = CustomViewModelFactory(application)
         ViewModelProvider(this, factory).get(SignUpViewModel::class.java)
     }
+
+    val loginService = LoginService()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,7 +55,7 @@ class SignUpActivity : AppCompatActivity(){
                 mViewModel.signUp(object: DiscourseService.CallbackResponse<SignUpResponse>{
                     override fun onResponse(response: SignUpResponse){
                         enableLoading(false)
-                        handleResponse(response)
+                        handleResponse(response, username = inputSignUpUsername.text.toString())
                     }
 
                     override fun onFailure(t: Throwable, res: Response<*>?) {
@@ -120,16 +123,16 @@ class SignUpActivity : AppCompatActivity(){
 
     }
 
-    fun handleResponse(response: SignUpResponse) {
+    fun handleResponse(response: SignUpResponse, username: String) {
         val success = response.success!!
          if (success) {
              val intent = Intent(this, TabsActivity::class.java)
+             loginService.saveSession(this, username)
              intent.putExtra(FROM, SIGN_UP)
              startActivity(intent)
          } else {
              Snackbar.make(container, response.message.toString(), Snackbar.LENGTH_LONG).show()
          }
     }
-
 
 }

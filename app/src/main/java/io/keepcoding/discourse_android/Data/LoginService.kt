@@ -7,7 +7,7 @@ const val PREFERENCES_USERNAME = "username"
 
 class LoginService {
 
-    private fun saveSession(context: Context, username: String) {
+    fun saveSession(context: Context, username: String) {
         val preferences = context.getSharedPreferences(PREFERENCES_SESSION, Context.MODE_PRIVATE)
         preferences
                 .edit()
@@ -33,5 +33,4 @@ class LoginService {
         val username = preferences.getString(PREFERENCES_USERNAME, null)
         return username != null
     }
-
 }

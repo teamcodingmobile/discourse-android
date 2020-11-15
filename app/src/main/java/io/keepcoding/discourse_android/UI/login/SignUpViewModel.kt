@@ -25,6 +25,4 @@ class SignUpViewModel(private val context: Application) : ViewModel()  {
             }
         })
     }
-
-
 }
