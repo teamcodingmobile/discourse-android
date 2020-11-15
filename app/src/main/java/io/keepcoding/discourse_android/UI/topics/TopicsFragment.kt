@@ -90,7 +90,7 @@ class TopicsFragment() : Fragment(), CallbackTopicClick {
     private fun getTopics(){
         enableLoading()
         mViewModel.getTopics(object: DiscourseService.CallbackResponse<LatestTopicResponse> {
-            override fun onResponse (response: LatestTopicResponse) {
+            override fun onResponse(response: LatestTopicResponse) {
                 enableLoading(false)
                 viewError.visibility = View.INVISIBLE
                 swipeRefreshLayout?.isRefreshing = false
@@ -98,11 +98,13 @@ class TopicsFragment() : Fragment(), CallbackTopicClick {
                 topicsAdapter = TopicsAdapter(requireActivity().applicationContext, this@TopicsFragment, mTopics)
                 listTopics.adapter = topicsAdapter
             }
-            override fun onFailure(t: Throwable, res: Response<*>?) {
+            override fun onFailure(t: Throwable, res: Response<*>?, code: Int) {
                 enableLoading(false)
                 viewError.visibility = View.VISIBLE
                 swipeRefreshLayout?.isRefreshing = false
             }
+
+
         })
     }
 

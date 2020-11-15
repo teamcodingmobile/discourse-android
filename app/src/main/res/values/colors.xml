@@ -5,8 +5,10 @@
     <color name="blue">#03AFEE</color>
     <color name="whiteTwo">#F5F5F5</color>
     <color name="mediumGrey">#D9D9D9</color>
-    <color name="gradientStart">#00aeef</color>
-    <color name="gradientEnd">#f2e88f</color>
+    <color name="gradientTopicStart">#00aeef</color>
+    <color name="gradientTopicEnd">#f2e88f</color>
+    <color name="gradientLoginStart">#f2e88f</color>
+    <color name="gradientLoginEnd">#ffc0cb</color>
     <color name="warmGrey">#999999</color>
     <color name="textColor">#191919</color>
 

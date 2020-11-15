@@ -12,16 +12,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Discourseandroid">
-        <activity android:name=".UI.MainActivity"
-            android:theme="@style/Theme.Discourseandroid"
-            >
+        <activity android:name=".UI.login.MainActivity"
+            android:theme="@style/Theme.Discourseandroid">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".UI.TabsActivity"
+            android:theme="@style/Theme.Discourseandroid"/>
         <activity android:name=".UI.topics.topic_detail.TopicDetailActivity"
             android:theme="@style/Theme.Discourseandroid"/>
+        <activity android:name=".UI.login.SignUpActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:name=".UI.login.SignInActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
 
     </application>
 
