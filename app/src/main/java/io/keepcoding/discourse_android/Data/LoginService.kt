@@ -29,8 +29,7 @@ class LoginService {
     }
 
     fun isLogged(context: Context): Boolean {
-        val preferences = context.getSharedPreferences(PREFERENCES_SESSION, Context.MODE_PRIVATE)
-        val username = preferences.getString(PREFERENCES_USERNAME, null)
+        val username = getUsername(context)
         return username != null
     }
 }
