@@ -1,6 +1,7 @@
 package io.keepcoding.discourse_android.UI
 
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
@@ -9,6 +10,8 @@ import io.keepcoding.discourse_android.R
 import io.keepcoding.discourse_android.UI.login.FROM
 import io.keepcoding.discourse_android.UI.login.SIGN_UP
 import io.keepcoding.discourse_android.UI.topics.TopicsFragment
+import io.keepcoding.discourse_android.UI.topics.create_topic.CREATE_TOPIC
+import io.keepcoding.discourse_android.UI.topics.create_topic.CreateTopicActivity
 import kotlinx.android.synthetic.main.tabs_activity.*
 
 class TabsActivity : AppCompatActivity(), TopicsFragment.TopicsInteractionListener {
@@ -41,8 +44,16 @@ class TabsActivity : AppCompatActivity(), TopicsFragment.TopicsInteractionListen
         })
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == CREATE_TOPIC)
+            viewPager.currentItem = 0
+            Snackbar.make(container, R.string.message_topic_created, Snackbar.LENGTH_LONG).show()
+    }
+
     override fun onCreateTopic() {
-       //ir a crear topic
+        val intent = Intent(this, CreateTopicActivity::class.java)
+        startActivityForResult(intent, CREATE_TOPIC)
     }
 
     fun init(from: String){

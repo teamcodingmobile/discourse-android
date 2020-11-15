@@ -1,5 +1,6 @@
 package io.keepcoding.discourse_android.Data.Client.Http
 
+import io.keepcoding.discourse_android.Data.Models.AppModels.PostModel
 import io.keepcoding.discourse_android.Data.Models.AppModels.ResetPasswordModel
 import io.keepcoding.discourse_android.Data.Models.AppModels.SignUpModel
 import io.keepcoding.discourse_android.Data.Models.ResponseModels.*
@@ -23,5 +24,9 @@ interface DiscourseApi {
 
     @POST("session/forgot_password")
     fun resetPassword(@Body body: ResetPasswordModel) : Call <ResetPasswordResponse>
+
+    @POST ("posts.json")
+    fun createTopic(@Body body: PostModel) : Call <PostResponse>
+    fun replyTopic(@Body body: PostModel) : Call <PostResponse>
 
 }

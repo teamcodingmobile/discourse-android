@@ -38,7 +38,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/createText"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:autofillHints="@string/hint_username" />
 
             <EditText
                 android:id="@+id/inputSignInPassword"
@@ -49,7 +50,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/inputSignInUsername"
-                android:inputType="textPassword"/>
+                android:inputType="textPassword"
+                android:autofillHints="@string/hint_password" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
@@ -91,7 +93,7 @@
             android:backgroundTint="@color/blue"
             app:cornerRadius="4dp"
             android:textColor="@color/white"
-            android:text="Login"
+            android:text="@string/login"
             android:textAllCaps="false"/>
 
     </LinearLayout>

@@ -23,7 +23,7 @@ import retrofit2.Response
 class TopicDetailViewModel(private val context: Application) : ViewModel()  {
 
     fun getSingleTopic(cb: DiscourseService.CallbackResponse<SingleTopicResponse>, topicId: String) {
-        DiscourseService().discourseApi.fetchSingleTopic(topicId).enqueue(object : Callback<SingleTopicResponse> {
+        DiscourseService(context).discourseApi.fetchSingleTopic(topicId).enqueue(object : Callback<SingleTopicResponse> {
             override fun onResponse(call: Call<SingleTopicResponse>, response: Response<SingleTopicResponse>) {
                 if (response.body() != null) {
                     cb.onResponse(response.body()!!)

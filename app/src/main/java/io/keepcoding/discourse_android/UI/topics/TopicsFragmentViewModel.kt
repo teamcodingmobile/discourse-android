@@ -13,7 +13,7 @@ class TopicsFragmentViewModel(private val context: Application) : ViewModel() {
 
 
     fun getTopics(cb: DiscourseService.CallbackResponse<LatestTopicResponse>) {
-        DiscourseService().discourseApi.fetchTopics().enqueue(object : Callback<LatestTopicResponse> {
+        DiscourseService(context).discourseApi.fetchTopics().enqueue(object : Callback<LatestTopicResponse> {
             override fun onResponse(call: Call<LatestTopicResponse>, response: Response<LatestTopicResponse>) {
                 if (response.body() != null) {
                     cb.onResponse(response.body()!!)

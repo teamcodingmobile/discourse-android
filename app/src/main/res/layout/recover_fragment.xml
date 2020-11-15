@@ -38,7 +38,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/createText"
-                android:inputType="text"/>
+                android:inputType="text"
+                android:autofillHints="@string/hint_username" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
