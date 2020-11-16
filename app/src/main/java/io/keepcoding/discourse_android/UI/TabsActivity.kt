@@ -46,9 +46,10 @@ class TabsActivity : AppCompatActivity(), TopicsFragment.TopicsInteractionListen
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == CREATE_TOPIC)
+        if (requestCode == CREATE_TOPIC) {
             viewPager.currentItem = 0
             Snackbar.make(container, R.string.message_topic_created, Snackbar.LENGTH_LONG).show()
+        }
     }
 
     override fun onCreateTopic() {
