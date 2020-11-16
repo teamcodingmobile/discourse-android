@@ -50,6 +50,7 @@ data class SingleTopicItem (
 
             return Poster(
                     username = user?.username ?: "",
+                    id = user?.id ?: 0,
                     URL = userURL
             )
         }
