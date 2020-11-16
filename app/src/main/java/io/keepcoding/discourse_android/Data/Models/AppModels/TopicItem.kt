@@ -19,7 +19,7 @@ data class TopicItem(
     companion object {
         var utils = Utils()
 
-        fun parseTopicsList(response: LatestTopicResponse): List<TopicItem> {
+        fun parseTopicsList(response: LatestTopicResponse): MutableList<TopicItem> {
             val objectList = response.topicList?.topics!!
             val topics = mutableListOf<TopicItem>()
 
