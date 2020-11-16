@@ -12,7 +12,7 @@ import retrofit2.Response
 
 class SignInViewModel(private val context: Application) : ViewModel()  {
     fun login(cb: DiscourseService.CallbackResponse<SignInResponse>, username: String) {
-        DiscourseService().discourseApi.signIn(username).enqueue(object : Callback<SignInResponse> {
+        DiscourseService(context).discourseApi.signIn(username).enqueue(object : Callback<SignInResponse> {
             override fun onResponse(call: Call<SignInResponse>, response: Response<SignInResponse>) {
                 if (response.body() != null) {
                     cb.onResponse(response.body()!!)
@@ -28,7 +28,7 @@ class SignInViewModel(private val context: Application) : ViewModel()  {
     }
 
     fun resetPassword(cb: DiscourseService.CallbackResponse<ResetPasswordResponse>, form: ResetPasswordModel) {
-        DiscourseService().discourseApi.resetPassword(form).enqueue(object : Callback<ResetPasswordResponse> {
+        DiscourseService(context).discourseApi.resetPassword(form).enqueue(object : Callback<ResetPasswordResponse> {
             override fun onResponse(call: Call<ResetPasswordResponse>, response: Response<ResetPasswordResponse>) {
                 if (response.body() != null) {
                     cb.onResponse(response.body()!!)

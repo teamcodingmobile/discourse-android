@@ -27,6 +27,10 @@
             android:windowSoftInputMode="adjustResize|stateHidden"/>
         <activity android:name=".UI.login.SignInActivity"
             android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:name=".UI.topics.create_topic.CreateTopicActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:name=".UI.topics.topic_detail.reply.ReplyTopicActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"/>
 
     </application>
 

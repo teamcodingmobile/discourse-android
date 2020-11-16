@@ -67,6 +67,7 @@ class SignUpActivity : AppCompatActivity(){
                 },  form = signUpModel)
 
             } else {
+                enableLoading(false)
                 showErrors()
             }
         }

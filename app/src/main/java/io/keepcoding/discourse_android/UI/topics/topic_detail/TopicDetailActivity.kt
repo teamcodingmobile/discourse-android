@@ -1,5 +1,6 @@
 package io.keepcoding.discourse_android.UI.topics.topic_detail
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
@@ -7,12 +8,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import io.keepcoding.discourse_android.CustomViewModelFactory
 import io.keepcoding.discourse_android.Data.Client.Http.DiscourseService
 import io.keepcoding.discourse_android.Data.Models.AppModels.PostItem
 import io.keepcoding.discourse_android.Data.Models.AppModels.SingleTopicItem
 import io.keepcoding.discourse_android.Data.Models.ResponseModels.SingleTopicResponse
 import io.keepcoding.discourse_android.R
+import io.keepcoding.discourse_android.UI.topics.topic_detail.reply.REPLY_TOPIC
+import io.keepcoding.discourse_android.UI.topics.topic_detail.reply.ReplyTopicActivity
 import kotlinx.android.synthetic.main.topic_detail_activity.*
 import retrofit2.Response
 
@@ -37,7 +41,9 @@ class TopicDetailActivity: AppCompatActivity() {
         }
 
         reply_button.setOnClickListener(){
-            //go to reply
+            val intent = Intent(applicationContext, ReplyTopicActivity::class.java)
+            intent.putExtra("TOPIC", topic)
+            startActivityForResult(intent, REPLY_TOPIC)
         }
 
         intent?.let {
@@ -69,6 +75,11 @@ class TopicDetailActivity: AppCompatActivity() {
             }, topicId = topicId!!)
         }
 
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REPLY_TOPIC)
+            recreate()
     }
 
     private fun init(){
