@@ -13,6 +13,10 @@ interface DiscourseApi {
     @POST("users")
     fun createUser(@Body body: SignUpModel) : Call <SignUpResponse>
 
+    @GET("admin/users/{id}.json")
+    @Headers( "Api-Username: system")
+    fun getUser(@Path("id") id: Int): Call<GetUserResponse>
+
     @GET ("users/{username}.json")
     fun signIn(@Path("username") username: String) : Call<SignInResponse>
 
