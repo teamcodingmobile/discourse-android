@@ -32,6 +32,11 @@
     <string name="error_server">Server error. Response code: 500</string>
     <string name="reset_success">Please check your email to finish the process</string>
     <string name="reset_failure">User not found, please sign up</string>
+    <string name="search">Search</string>
+    <string name="all_tab_bar">All</string>
+    <string name="posts_tab_bar">Posts</string>
+    <string name="users_tab_bar">Users</string>
+    <string name="sear_title">Search</string>
     <plurals name="years">
         <item quantity="one">%d year ago</item>
         <item quantity="other">%d years ago</item>
