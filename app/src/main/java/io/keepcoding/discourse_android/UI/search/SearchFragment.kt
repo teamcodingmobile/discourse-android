@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.isEmpty
 import androidx.core.view.isVisible
 import androidx.core.view.size
 import androidx.fragment.app.Fragment
@@ -47,6 +48,7 @@ class SearchFragment() : Fragment() {
     }
 
     private fun init() {
+        search.isSubmitButtonEnabled = false
         postsRecyclerViewSearch.layoutManager = LinearLayoutManager(activity)
         postsRecyclerViewSearch.isNestedScrollingEnabled = false
         postsRecyclerViewSearch.setHasFixedSize(false)
@@ -61,6 +63,7 @@ class SearchFragment() : Fragment() {
                 return false
             }
             override fun onQueryTextChange(newText: String): Boolean {
+                search.isSubmitButtonEnabled = true
 
                 return false
             }
@@ -93,7 +96,7 @@ class SearchFragment() : Fragment() {
                     mAdapterPosts = SearchPostsAdapter(requireActivity(), postsSearchList)
                     postsRecyclerViewSearch.adapter = mAdapterPosts
                 }else{
-                    postsRecyclerViewSearch.visibility = View.INVISIBLE
+                    postsRecyclerViewSearch.visibility = View.GONE
                 }
 
                 if (usersSearchList?.size !=0){
@@ -101,7 +104,7 @@ class SearchFragment() : Fragment() {
                     mAdapterUsers = SearchUsersAdapter(requireActivity(), usersSearchList)
                     usersRecyclerViewSearch.adapter = mAdapterUsers
                 }else {
-                    postsRecyclerViewSearch.visibility = View.INVISIBLE
+                    postsRecyclerViewSearch.visibility = View.GONE
 
                 }
 
@@ -116,17 +119,14 @@ class SearchFragment() : Fragment() {
     fun setViewsList(){
         if (segmentController.selectedTabPosition == 0){
             postsList.visibility = View.VISIBLE
-            postsList.maxHeight = Int.MAX_VALUE
             usersList.visibility = View.VISIBLE
 
         } else if (segmentController.selectedTabPosition == 1){
             postsList.visibility = View.VISIBLE
-            postsList.maxHeight = Int.MAX_VALUE
-            usersList.visibility = View.INVISIBLE
+            usersList.visibility = View.GONE
 
         }else {
-            postsList.visibility = View.INVISIBLE
-            postsList.maxHeight = 0
+            postsList.visibility = View.GONE
             usersList.visibility = View.VISIBLE
 
         }
