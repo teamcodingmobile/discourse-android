@@ -12,8 +12,8 @@ import retrofit2.Response
 class TopicsFragmentViewModel(private val context: Application) : ViewModel() {
 
 
-    fun getTopics(cb: DiscourseService.CallbackResponse<LatestTopicResponse>) {
-        DiscourseService(context).discourseApi.fetchTopics().enqueue(object : Callback<LatestTopicResponse> {
+    fun getTopics(cb: DiscourseService.CallbackResponse<LatestTopicResponse>, page: Int = 0) {
+        DiscourseService(context).discourseApi.fetchTopics(atPage = page).enqueue(object : Callback<LatestTopicResponse> {
             override fun onResponse(call: Call<LatestTopicResponse>, response: Response<LatestTopicResponse>) {
                 if (response.body() != null) {
                     cb.onResponse(response.body()!!)
@@ -27,7 +27,7 @@ class TopicsFragmentViewModel(private val context: Application) : ViewModel() {
         })
     }
 
-    fun parseTopics (response: LatestTopicResponse): List<TopicItem>? {
+    fun parseTopics (response: LatestTopicResponse): MutableList<TopicItem>? {
         return TopicItem.parseTopicsList(response)
     }
 }
