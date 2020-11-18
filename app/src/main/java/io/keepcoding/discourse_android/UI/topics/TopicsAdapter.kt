@@ -16,7 +16,7 @@ import io.keepcoding.discourse_android.Utils
 import kotlinx.android.synthetic.main.item_topic.view.*
 
 
-class TopicsAdapter(private val context: Context, private val callbackTopicClick: CallbackTopicClick, private val topicList: List<TopicItem>?): RecyclerView.Adapter<TopicsAdapter.TopicHolder>() {
+class TopicsAdapter(private val context: Context, private val callbackTopicClick: CallbackTopicClick?, private val topicList: List<TopicItem>?): RecyclerView.Adapter<TopicsAdapter.TopicHolder>() {
 
 
     override fun getItemCount(): Int {
@@ -32,7 +32,7 @@ class TopicsAdapter(private val context: Context, private val callbackTopicClick
         topicList?.get(position).let { topic ->
 
             holder.itemView.setOnClickListener {
-                callbackTopicClick.onItemClick(topic?.id!!)
+                callbackTopicClick?.onItemClick(topic?.id!!)
             }
             holder.topic = topic
         }
