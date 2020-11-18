@@ -74,6 +74,7 @@ class TopicsFragment() : Fragment(), CallbackTopicClick {
         swipeRefreshLayout = view?.findViewById(R.id.swipeRefreshLayout)
         swipeRefreshLayout?.setProgressViewEndTarget(true, 0)
         swipeRefreshLayout?.setOnRefreshListener {
+            mTopics = null
             getTopics()
         }
 

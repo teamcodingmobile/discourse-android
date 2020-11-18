@@ -19,7 +19,7 @@ data class TopicItem(
 
 
             fun parseTopicsList(response: LatestTopicResponse): MutableList<TopicItem> {
-            val objectList = response.topicList?.topics!!
+            val topicsList = response.topicList?.topics!!
 
             val topics = mutableListOf<TopicItem>()
 
