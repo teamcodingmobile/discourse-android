@@ -20,7 +20,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".UI.TabsActivity"
-            android:theme="@style/Theme.Discourseandroid"/>
+            android:theme="@style/Theme.Discourseandroid"
+            android:windowSoftInputMode="adjustPan"/>
         <activity android:name=".UI.topics.topic_detail.TopicDetailActivity"
             android:theme="@style/Theme.Discourseandroid"/>
         <activity android:name=".UI.login.SignUpActivity"

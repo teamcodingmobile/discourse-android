@@ -9,19 +9,16 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import io.keepcoding.discourse_android.Data.Models.ResponseModels.PostsItem
 import io.keepcoding.discourse_android.Data.Models.ResponseModels.PostsItemSearch
 import io.keepcoding.discourse_android.R
 import io.keepcoding.discourse_android.Utils
 import kotlinx.android.synthetic.main.item_post.view.*
-import org.jsoup.Jsoup
-import org.jsoup.safety.Whitelist
 import java.util.*
 
-class SearchAdapter (
+class SearchPostsAdapter (
         private val context: Context,
         private val postsSearchList: List<PostsItemSearch>?
-):RecyclerView.Adapter<SearchAdapter.SearchHolder>() {
+):RecyclerView.Adapter<SearchPostsAdapter.SearchHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchHolder {
@@ -55,8 +52,6 @@ class SearchAdapter (
                     itemView.posterUsername.typeface = myCustomFontBold
                     itemView.labelContent.typeface = myCustomFontRegular
                     itemView.posterUsername.text = it.username.toString()
-                    var blurb: String = it.blurb
-                    var parsedBlurb = Jsoup.clean(blurb, Whitelist())
                     itemView.labelContent.text = it.blurb
                     var date: Date = utils.formatDate(it.date)
                     var timeOffset = utils.getTimeOffset(date)

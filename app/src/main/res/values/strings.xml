@@ -37,6 +37,8 @@
     <string name="posts_tab_bar">Posts</string>
     <string name="users_tab_bar">Users</string>
     <string name="sear_title">Search</string>
+    <string name="posts_title">Posts</string>
+    <string name="users_title">Users</string>
     <plurals name="years">
         <item quantity="one">%d year ago</item>
         <item quantity="other">%d years ago</item>
