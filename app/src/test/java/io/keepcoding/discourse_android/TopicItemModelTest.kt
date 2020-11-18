@@ -37,6 +37,7 @@ class TopicItemModelTest {
         )
         val testPoster = Poster (
                 username = "userTest",
+                id = 1,
                 URL = "URLTest"
         )
 
@@ -50,6 +51,5 @@ class TopicItemModelTest {
         assertEquals("URLTest", topic.poster?.URL)
 
     }
-
 
 }
