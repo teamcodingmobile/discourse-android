@@ -19,8 +19,10 @@ data class TopicItem(
     companion object {
         var utils = Utils()
 
-        fun parseTopicsList(response: LatestTopicResponse): MutableList<TopicItem> {
+
+            fun parseTopicsList(response: LatestTopicResponse): MutableList<TopicItem> {
             val objectList = response.topicList?.topics!!
+
             val topics = mutableListOf<TopicItem>()
 
             val usersList = response.users!!
@@ -31,11 +33,15 @@ data class TopicItem(
                 users.add(parsedUser)
             }
 
-            for (topic in objectList) {
+            for (topic in topicsList) {
 
-                val topicPoster = topic?.lastPosterUsername
+                val posterList = topic?.posters
 
-                val poster = users.first { it.username == topicPoster }
+                var topicposterObject = posterList?.first { it?.description!!.contains("Original") }
+
+                val topicPoster = topicposterObject?.userId
+
+                val poster = users.first { it.id == topicPoster }
 
                 val parsedTopic = parseTopic(topic, poster)
                 topics.add(parsedTopic)
@@ -50,6 +56,7 @@ data class TopicItem(
 
             return Poster (
                     username = user?.username ?: "",
+                    id = user?.id ?: 0,
                     URL = userURL
             )
         }
