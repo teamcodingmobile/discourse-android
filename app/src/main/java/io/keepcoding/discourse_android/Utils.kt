@@ -54,8 +54,8 @@ class Utils {
         )
     }
 
-    fun getURL(forString: String?) : String {
-        val sized = forString?.replace(oldValue = "{size}", newValue = "80")
+    fun getURL(forString: String?, size: Int = 80) : String {
+        val sized = forString?.replace(oldValue = "{size}", newValue = size.toString())
         return "https://mdiscourse.keepcoding.io$sized"
     }
 

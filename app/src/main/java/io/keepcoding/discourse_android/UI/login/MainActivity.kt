@@ -22,10 +22,11 @@ class MainActivity : AppCompatActivity(){
     private val textList = arrayOf("community","team","customers","fans")
     private var counter = 0
     private val timer = Timer()
-    private val loginService = LoginService()
+    private var loginService: LoginService? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        loginService = LoginService(applicationContext)
         setContentView(R.layout.main_activity)
         setSupportActionBar(findViewById(R.id.toolbar))
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -47,7 +48,7 @@ class MainActivity : AppCompatActivity(){
     }
 
     private fun checkSession() {
-        if (loginService.isLogged(this.applicationContext)) {
+        if (loginService!!.isLogged()) {
             goToTopics()
         }
     }

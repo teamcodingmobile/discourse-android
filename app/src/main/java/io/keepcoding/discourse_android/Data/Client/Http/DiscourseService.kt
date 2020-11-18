@@ -1,5 +1,7 @@
 package io.keepcoding.discourse_android.Data.Client.Http
 
+import android.content.Context
+import io.keepcoding.discourse_android.Data.LoginService
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -13,7 +15,7 @@ const val API_USERNAME = "system"
 const val CONTENT_TYPE = "Content-Type: application/json"
 
 
-class DiscourseService {
+class DiscourseService(context: Context) {
 
     interface CallbackResponse<T> {
         fun onResponse(response: T)
@@ -21,13 +23,14 @@ class DiscourseService {
     }
 
     val discourseApi: DiscourseApi
+    val loginService = LoginService(context)
 
     init {
 
         val timeout: Long = 6 * 1000
 
         val logging = HttpLoggingInterceptor()
-        logging.setLevel(HttpLoggingInterceptor.Level.BODY)
+        logging.setLevel(HttpLoggingInterceptor.Level.BASIC)
 
 
         val client = OkHttpClient.Builder().apply{
@@ -35,7 +38,9 @@ class DiscourseService {
                     Interceptor { chain ->
                         val builder = chain.request().newBuilder()
                         builder.header("Api-Key", API_KEY)
-                        builder.header("Api-Username", API_USERNAME)
+                        if (chain.request().header("Api-Username") == null) {
+                            builder.header("Api-Username", loginService.getUsername() ?: API_USERNAME)
+                        }
                         builder.header("Content-Type", CONTENT_TYPE)
                         return@Interceptor chain.proceed(builder.build())
                     }

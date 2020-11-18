@@ -4,32 +4,40 @@ import android.content.Context
 
 const val PREFERENCES_SESSION = "session"
 const val PREFERENCES_USERNAME = "username"
+const val PREFERENCES_ID = "id"
 
-class LoginService {
+class LoginService(private val context: Context) {
 
-    fun saveSession(context: Context, username: String) {
+    fun saveSession(id: Int, username: String) {
         val preferences = context.getSharedPreferences(PREFERENCES_SESSION, Context.MODE_PRIVATE)
         preferences
                 .edit()
+                .putInt(PREFERENCES_ID, id)
                 .putString(PREFERENCES_USERNAME, username)
                 .apply()
     }
 
-    fun getUsername(context: Context): String? {
+    fun getUserId(): Int {
+        return context
+            .getSharedPreferences(PREFERENCES_SESSION, Context.MODE_PRIVATE)
+            .getInt(PREFERENCES_ID, 0)
+    }
+
+    fun getUsername(): String? {
         val preferences = context.getSharedPreferences(PREFERENCES_SESSION, Context.MODE_PRIVATE)
         return preferences.getString(PREFERENCES_USERNAME, null)
     }
 
-    fun logout(context: Context) {
+    fun logout() {
         val preferences = context.getSharedPreferences(PREFERENCES_SESSION, Context.MODE_PRIVATE)
         preferences
                 .edit()
+                .remove(PREFERENCES_ID)
                 .putString(PREFERENCES_USERNAME, null)
                 .apply()
     }
 
-    fun isLogged(context: Context): Boolean {
-        val username = getUsername(context)
-        return username != null
+    fun isLogged(): Boolean {
+        return 0 != getUserId() && getUsername() != null
     }
 }

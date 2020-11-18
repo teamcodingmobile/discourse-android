@@ -4,6 +4,7 @@ import io.keepcoding.discourse_android.Data.Models.ResponseModels.CreatedBy
 import io.keepcoding.discourse_android.Data.Models.ResponseModels.PostsItem
 import io.keepcoding.discourse_android.Data.Models.ResponseModels.SingleTopicResponse
 import io.keepcoding.discourse_android.Utils
+import java.io.Serializable
 import java.util.*
 
 data class SingleTopicItem (
@@ -15,7 +16,7 @@ data class SingleTopicItem (
         val replies: Int = 0,
         val poster: Poster? = null,
         val posts: List<PostItem>? = null,
-    ) {
+    ): Serializable {
 
     companion object {
         var utils = Utils()
@@ -49,6 +50,7 @@ data class SingleTopicItem (
 
             return Poster(
                     username = user?.username ?: "",
+                    id = user?.id ?: 0,
                     URL = userURL
             )
         }

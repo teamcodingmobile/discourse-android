@@ -17,6 +17,9 @@ data class UsersItem(
 	@field:SerializedName("avatar_template")
 	val avatarTemplate: String? = null,
 
+	@field:SerializedName("id")
+	val id: Int? = null,
+
 	@field:SerializedName("username")
 	val username: String? = null
 ): Serializable
