@@ -29,7 +29,7 @@ class SignUpActivity : AppCompatActivity(){
         ViewModelProvider(this, factory).get(SignUpViewModel::class.java)
     }
 
-    val loginService = LoginService()
+    val loginService = LoginService(application)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -127,7 +127,7 @@ class SignUpActivity : AppCompatActivity(){
         val success = response.success!!
          if (success) {
              val intent = Intent(this, TabsActivity::class.java)
-             loginService.saveSession(this, username)
+             loginService.saveSession(response.userId!!, username)
              intent.putExtra(FROM, SIGN_UP)
              startActivity(intent)
          } else {

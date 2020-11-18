@@ -15,13 +15,16 @@ interface DiscourseApi {
 
     @GET("admin/users/{id}.json")
     @Headers( "Api-Username: system")
-    fun getUser(@Path("id") id: Int): Call<GetUserResponse>
+    fun fetchUser(@Path("id") id: Int): Call<GetUserResponse>
 
     @GET ("users/{username}.json")
     fun signIn(@Path("username") username: String) : Call<SignInResponse>
 
     @GET ("latest.json")
     fun fetchTopics() : Call<LatestTopicResponse>
+
+    @GET ("/topics/created-by/{username}.json")
+    fun fetchUserTopics(@Path("username") username: String, @Query("page") page: Int): Call<GetUserTopicsResponse>
 
     @GET ("t/{topicId}.json")
     fun fetchSingleTopic(@Path("topicId") topicId: String) : Call<SingleTopicResponse>

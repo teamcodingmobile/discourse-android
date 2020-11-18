@@ -23,7 +23,7 @@ class DiscourseService(context: Context) {
     }
 
     val discourseApi: DiscourseApi
-    val loginService = LoginService()
+    val loginService = LoginService(context)
 
     init {
 
@@ -39,7 +39,7 @@ class DiscourseService(context: Context) {
                         val builder = chain.request().newBuilder()
                         builder.header("Api-Key", API_KEY)
                         if (chain.request().header("Api-Username") == null) {
-                            builder.header("Api-Username", loginService.getUsername(context) ?: API_USERNAME)
+                            builder.header("Api-Username", loginService.getUsername() ?: API_USERNAME)
                         }
                         builder.header("Content-Type", CONTENT_TYPE)
                         return@Interceptor chain.proceed(builder.build())

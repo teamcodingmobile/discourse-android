@@ -31,13 +31,14 @@ class SignInActivity : AppCompatActivity(),
         ViewModelProvider(this, factory).get(SignInViewModel::class.java)
     }
 
-    val loginService = LoginService()
+    var loginService: LoginService? = null
 
     val signInFragment = SignInFragment()
     val recoverFragment = RecoverFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        loginService = LoginService(applicationContext)
         setContentView(R.layout.signin_activity)
         setSupportActionBar(findViewById(R.id.toolbar))
         supportFragmentManager.beginTransaction()
@@ -57,7 +58,14 @@ class SignInActivity : AppCompatActivity(),
         mViewModel.login(object: DiscourseService.CallbackResponse<SignInResponse>{
             override fun onResponse(response: SignInResponse) {
                 enableLoading(false)
-                handleLoginResponse(username = inputSignInUsername.text.toString())
+
+                val userId = response.user?.id
+
+                if (null == userId) {
+                    handleError(0)
+                }
+
+                handleLoginResponse(id = userId!!, username = inputSignInUsername.text.toString())
             }
 
             override fun onFailure(t: Throwable, res: Response<*>?, code: Int) {
@@ -105,8 +113,8 @@ class SignInActivity : AppCompatActivity(),
         }
     }
 
-    private fun handleLoginResponse(username: String){
-            loginService.saveSession(this, username)
+    private fun handleLoginResponse(id: Int, username: String){
+            loginService?.saveSession(id, username)
             val intent = Intent(this, TabsActivity::class.java)
             startActivity(intent)
     }
