@@ -30,7 +30,6 @@ class SignInActivity : AppCompatActivity(),
         val factory = CustomViewModelFactory(application)
         ViewModelProvider(this, factory).get(SignInViewModel::class.java)
     }
-
     val loginService = LoginService()
 
     val signInFragment = SignInFragment()

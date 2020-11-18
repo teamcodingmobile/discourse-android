@@ -22,13 +22,28 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
                 app:layout_constraintTop_toTopOf="parent"
+                app:title="@string/sear_title"
+                app:titleTextColor="@color/black"
+
                 >
+                <TextView
+                    android:id="@+id/toolbar_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/search"
+                    android:textColor="@color/black"
+                    android:textSize="28sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="4dp"
+                    />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/layoutToolbar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="6dp">
+                    android:layout_marginEnd="6dp"
+                    >
 
                     <androidx.appcompat.widget.SearchView
                         android:id="@+id/search"
@@ -37,22 +52,6 @@
                         android:gravity="center"
                         app:layout_constraintEnd_toEndOf="parent"
                         />
-
-                    <TextView
-                        android:id="@+id/toolbar_text"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:text="@string/search"
-                        android:textColor="@color/black"
-                        android:textSize="28sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
-                        android:layout_marginEnd="6dp"
-                         />
-
-
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -103,6 +102,15 @@
                     android:text="@string/users_tab_bar" />
 
             </com.google.android.material.tabs.TabLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/postsRecyclerViewSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/segmentController"
+                android:layout_marginTop="8dp"
+                />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

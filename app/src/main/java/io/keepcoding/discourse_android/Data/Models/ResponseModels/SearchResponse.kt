@@ -40,5 +40,8 @@ data class PostsItemSearch(
 	val avatarTemplate: String,
 
 	@field:SerializedName("blurb")
-	val blurb: String
+	val blurb: String,
+
+	@field:SerializedName("created_at")
+	val date: String
 )

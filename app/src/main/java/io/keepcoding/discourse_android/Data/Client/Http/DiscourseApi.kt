@@ -25,6 +25,6 @@ interface DiscourseApi {
     fun resetPassword(@Body body: ResetPasswordModel) : Call <ResetPasswordResponse>
 
     @GET("search/query.json")
-    fun searchyWord(@Query ("word") word:String): Call<SearchResponse>
+    fun searchByWord(@Query ("term") term:String): Call<SearchResponse>
 
 }

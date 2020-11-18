@@ -2,7 +2,6 @@ package io.keepcoding.discourse_android
 
 import android.content.Context
 import io.keepcoding.discourse_android.Data.Models.AppModels.TimeOffset
-import kotlinx.android.synthetic.main.item_topic.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
