@@ -17,7 +17,7 @@ interface DiscourseApi {
     fun signIn(@Path("username") username: String) : Call<SignInResponse>
 
     @GET ("latest.json")
-    fun fetchTopics(@Query("page") atPage: Int = 1) : Call<LatestTopicResponse>
+    fun fetchTopics(@Query("page") atPage: Int = 0) : Call<LatestTopicResponse>
 
     @GET ("t/{topicId}.json")
     fun fetchSingleTopic(@Path("topicId") topicId: String) : Call<SingleTopicResponse>

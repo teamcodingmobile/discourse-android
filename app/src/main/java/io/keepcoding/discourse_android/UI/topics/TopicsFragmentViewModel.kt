@@ -12,7 +12,7 @@ import retrofit2.Response
 class TopicsFragmentViewModel(private val context: Application) : ViewModel() {
 
 
-    fun getTopics(cb: DiscourseService.CallbackResponse<LatestTopicResponse>, page: Int = 1) {
+    fun getTopics(cb: DiscourseService.CallbackResponse<LatestTopicResponse>, page: Int = 0) {
         DiscourseService(context).discourseApi.fetchTopics(atPage = page).enqueue(object : Callback<LatestTopicResponse> {
             override fun onResponse(call: Call<LatestTopicResponse>, response: Response<LatestTopicResponse>) {
                 if (response.body() != null) {

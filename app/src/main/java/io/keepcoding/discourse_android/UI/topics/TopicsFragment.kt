@@ -100,7 +100,7 @@ class TopicsFragment() : Fragment(), CallbackTopicClick {
         }
     }
 
-    private fun getTopics(page: Int = 1){
+    private fun getTopics(page: Int = 0){
         enableLoading()
         mViewModel.getTopics(object: DiscourseService.CallbackResponse<LatestTopicResponse> {
             override fun onResponse(response: LatestTopicResponse) {
