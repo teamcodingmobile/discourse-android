@@ -29,10 +29,11 @@ class SignUpActivity : AppCompatActivity(){
         ViewModelProvider(this, factory).get(SignUpViewModel::class.java)
     }
 
-    val loginService = LoginService(application)
+    var loginService: LoginService? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        loginService = LoginService(application)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.signup_activity)
         setSupportActionBar(findViewById(R.id.toolbar))
@@ -127,7 +128,7 @@ class SignUpActivity : AppCompatActivity(){
         val success = response.success!!
          if (success) {
              val intent = Intent(this, TabsActivity::class.java)
-             loginService.saveSession(response.userId!!, username)
+             loginService?.saveSession(response.userId!!, username)
              intent.putExtra(FROM, SIGN_UP)
              startActivity(intent)
          } else {

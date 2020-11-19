@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.create_topic_activity.viewLoading
 import retrofit2.Response
 
 const val CREATE_TOPIC = 100
+const val CANCEL_TOPIC = 200
 
 class CreateTopicActivity : AppCompatActivity(){
 
@@ -34,6 +35,7 @@ class CreateTopicActivity : AppCompatActivity(){
         init()
 
         cancel_button.setOnClickListener(){
+            setResult(CANCEL_TOPIC)
             finish()
         }
 

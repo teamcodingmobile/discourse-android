@@ -26,7 +26,6 @@ import java.lang.IllegalArgumentException
 class TopicsFragment() : Fragment(), CallbackTopicClick {
 
     private lateinit var linearLayoutManager: LinearLayoutManager
-    private lateinit var adapter: TopicsAdapter
 
     var swipeRefreshLayout: SwipeRefreshLayout? = null
     var topicsInteractionListener: TopicsInteractionListener? = null
