@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.graphics.Paint.UNDERLINE_TEXT_FLAG
 import android.graphics.Typeface
 import android.os.Bundle
+import android.view.Menu
 import android.view.WindowManager
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity

@@ -9,3 +9,4 @@ data class PostItem (
         val date: Date = Date(),
         val content: String = ""
 ): Serializable
+

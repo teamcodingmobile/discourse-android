@@ -1,9 +1,5 @@
 package io.keepcoding.discourse_android
 
-import io.keepcoding.discourse_android.Data.Models.AppModels.Poster
-import io.keepcoding.discourse_android.Data.Models.AppModels.TopicItem
-import io.keepcoding.discourse_android.Data.Models.ResponseModels.TopicsItem
-import io.keepcoding.discourse_android.Data.Models.ResponseModels.UsersItem
 import junit.framework.Assert.assertEquals
 import org.junit.Test
 import java.text.SimpleDateFormat

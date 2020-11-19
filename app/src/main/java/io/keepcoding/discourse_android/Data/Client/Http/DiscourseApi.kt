@@ -32,6 +32,9 @@ interface DiscourseApi {
     @POST("session/forgot_password")
     fun resetPassword(@Body body: ResetPasswordModel) : Call <ResetPasswordResponse>
 
+    @GET("search/query.json")
+    fun searchByWord(@Query ("term") term:String): Call<SearchResponse>
+
     @POST ("posts.json")
     fun createTopic(@Body body: PostModel) : Call <PostResponse>
 
