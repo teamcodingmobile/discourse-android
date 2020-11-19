@@ -24,7 +24,6 @@ class CustomViewModelFactory(private val application: Application) :
                 isAssignableFrom(SignUpViewModel::class.java) -> SignUpViewModel(application)
                 isAssignableFrom(SignInViewModel::class.java) -> SignInViewModel(application)
                 isAssignableFrom(SearchFragmentViewModel::class.java) -> SearchFragmentViewModel(application)
-                else -> throw IllegalArgumentException("Unknown ViewModel")
                 isAssignableFrom(CreateTopicViewModel::class.java) -> CreateTopicViewModel(application)
                 isAssignableFrom(ReplyTopicViewModel::class.java) -> ReplyTopicViewModel(application)
                 isAssignableFrom(ProfileFragmentViewModel::class.java) -> ProfileFragmentViewModel(application)

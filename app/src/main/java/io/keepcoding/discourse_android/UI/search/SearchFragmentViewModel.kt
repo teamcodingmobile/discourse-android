@@ -11,7 +11,7 @@ import retrofit2.Response
 class SearchFragmentViewModel(private val context: Application) : ViewModel() {
 
     fun getSearch(withWord: String, cb: DiscourseService.CallbackResponse<SearchResponse>) {
-        DiscourseService().discourseApi.searchByWord(withWord).enqueue(object : Callback<SearchResponse> {
+        DiscourseService(context).discourseApi.searchByWord(withWord).enqueue(object : Callback<SearchResponse> {
 
             override fun onResponse(call: Call<SearchResponse>, response: Response<SearchResponse>) {
 

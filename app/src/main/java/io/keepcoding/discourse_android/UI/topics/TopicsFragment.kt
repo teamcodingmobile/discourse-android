@@ -82,6 +82,7 @@ class TopicsFragment() : Fragment(), CallbackTopicClick {
             getTopics()
         }
          listTopics.setBackgroundColor(Color.parseColor("#F8F8F8"))
+
     }
 
     override fun onResume() {

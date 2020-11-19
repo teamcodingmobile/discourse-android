@@ -60,7 +60,9 @@ class TabsActivity : AppCompatActivity(), TopicsFragment.TopicsInteractionListen
     fun init(from: String){
         if (from == SIGN_UP) {
             Snackbar.make(container, R.string.message_sign_up, Snackbar.LENGTH_LONG).show()
+
         }
+
     }
 
 
